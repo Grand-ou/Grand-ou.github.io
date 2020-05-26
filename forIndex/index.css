@@ -13,22 +13,29 @@ h5 {
 }
 
 
+.navbar-nav a.active {
+    color: red;
+    border-bottom: 3px solid white;
+}
 
+.navbar-dark .navbar-nav .nav-item.active .nav-link {
+    color: blue;
+}
 
 #header {
     position: fixed;
     top: 0px;
     left: 0px;
     width: 100%;
-    height: 50px;
-    background: #333333;
+    height: 70px;
+    background: aliceblue;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
     z-index: 999;
 }
 
 #title {
     float: left;
-    padding-top: 10px;
+    padding-top: 20px;
     padding-left: 10%;
     color: white;
     font-size: 1.25rem;
@@ -43,7 +50,7 @@ h5 {
     text-decoration: none;
 }
 
-#link a {
+#link a:link {
     color: darkgray;
     text-decoration: none;
 }
@@ -53,7 +60,112 @@ h5 {
     text-decoration: none;
 }
 
+#link a:visited {
+    color: cornflowerblue;
+    text-decoration: none;
+}
+
 #title a {
     color: darkgray;
     text-decoration: none;
+}
+
+#home {
+    position: relative;
+    ;
+    height: 1000px;
+}
+
+#in-1 {
+    height: 100px;
+}
+
+.pic {
+    top: 70px;
+    margin: 30px auto;
+    width: 600px;
+    height: 650px;
+    position: relative;
+    border: 20px solid;
+    border-color: #fff;
+    /* border-bottom-width: 100px; */
+    background-color: #f5f5f5;
+    box-shadow: #666 0 0 5px;
+}
+
+.homeImg {
+    width: 600px;
+    height: 600px;
+}
+
+.pic div {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+
+}
+
+
+#introduce {
+    position: relative;
+    /* top: 50%; */
+    height: 1000px;
+    /* left: 50%;
+    margin-left: 550px; */
+}
+
+#project {
+    width: 500px;
+    height: 300px;
+    background-color: red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*     position: relative;
+    height: 500px; */
+}
+
+.projectPic {
+    width: 200px;
+    height: 20px;
+    background-color: yellow;
+    /*     top: 100px; */
+    /* margin: 30px auto; */
+    /*     width: 280px; */
+
+    /*     position: relative; */
+
+    /*     border: 20px solid; */
+    /*     border-color: #fff;
+    border-bottom-width: 100px;
+    background-color: #f5f5f5;
+    box-shadow: #666 0 0 10px; */
+}
+
+#pro1 {
+    /*     left: 55%;
+    float: left; */
+
+}
+
+#pro2 {
+    background-color: blue;
+    /*     right: 55%;
+    float: right; */
+}
+
+#pro3 {
+    /*     float: right; */
+}
+
+#pro4 {
+    background-color: blue;
+    /*     float: left; */
+}
+
+#act {}
+
+#contact {
+    background-image: url(home1.jpg);
 }
