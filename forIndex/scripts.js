@@ -64,4 +64,4 @@ function scrollPic() {
     }
     k = k + 1; //k  ,執行下一次操作
 }
-setInterval("scrollPic()", 5000);
+setInterval("scrollPic()", 4000);

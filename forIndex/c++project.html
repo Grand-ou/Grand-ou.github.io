@@ -34,7 +34,8 @@
                 </li><br>
                 <li class="nav-item"> <a class="nav-link js-scroll-trigger "
                         href="https://youtu.be/ADBYMUGO77c">video</a></li><br>
-
+                <li class="nav-item"> <a class="nav-link js-scroll-trigger " href="#myPart">my part</a></li><br>
+                <li class="nav-item"> <a class="nav-link js-scroll-trigger " href="#myOpinion">my opinion</a></li><br>
 
 
 
@@ -136,52 +137,59 @@
         <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             此函數是我們象棋中最複雜的函數，其內部也運用了我們上述的所有函式，目的是要判斷一方玩家是否「倒棋」或「欠行」。實行的方法是試移動所有己方的棋子至所有可能的地點，利用willBeChecked判斷是否會被將軍。只要一種情況下willBeChecked為false，則回傳false。若所有情況皆會被將軍，則回傳true，結束遊戲。
         </p>
-        <ol start="3">
-            <li>五子棋：</li>
-        </ol>
-        <p>&nbsp;&nbsp; 五子棋的雙人模式很簡單，就只是把玩家下的棋印出來，然後檢查有沒有禁手(因為五子棋先手優勢太大因此對黑棋有所限制，ex不能同時有兩個活四或兩個活三)或是連五(五個相同顏色旗子連成直線)就好了。
-        </p>
-        <p>&nbsp;&nbsp;&nbsp;
-            所以我們決定寫能夠單人遊玩的AI系統，讓電腦幫我們判定應該要下在哪裡。首先，五子棋有幾種特定棋型可以幫助我們贏得勝利，例如活四(四個子連在一起且兩頭都沒有對手旗子)或者是死三(三個子連在一起但一頭被對手旗子擋住)等等，並且還有很多以許多特殊的形式呈現，例如連兩顆棋，空一格後在一顆棋，形成特殊的活三。而其能為我方帶來的助益各不相同。所以我決定量化這些棋型，活四為100分、死四30分、普通活三42分、特殊活三28分等等，這樣一來每個棋局都會有一個黑棋的分數以及白棋的分數。
-        </p>
-        <p>&nbsp;&nbsp;&nbsp; 我用窮舉的方式，以下設電腦為黑棋，真人為白旗</p>
-        <p>if (找到特定棋型(ex活三'、死四)</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; score( 黑棋或白棋 )+=point( case )</p>
-        <p>for( 每一格 )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; +=&nbsp; score( 黑 );</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; winrate = temp</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
-        <p>&nbsp;&nbsp;&nbsp; 在對手( 真人 )下完後，分析棋盤上每個落點，看下在哪裡可以為我方帶來最多的分數，以及同時減少對手最多的分數，那個點就是我們想要電腦下的。</p>
-        <p>&nbsp;&nbsp;&nbsp; 然而這並不能解決所有問題，因為有些情況，例如死四，雖然價值不高，只需一手便能阻止，但對手一旦做成該棋型還是必須去應，不然對手會直接勝利。所以我寫了一個迴圈阻止這件事情。</p>
-        <p>if ( 白棋有死四 )</p>
-        <p>&nbsp;&nbsp; for ( 每一格 )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( 白棋沒有死四 )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
-        <p>&nbsp;&nbsp;&nbsp; 這樣一來，只少AI已經不會犯愚蠢的錯誤了，然而我覺得電腦的能力不僅僅於此，所以我決定試著讓他預判對手的棋路</p>
-        <p>for(&nbsp; 每一格 )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; 原來分數( 白 )= score ( 白 )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下白子</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp; if (score( 白 ) - 原來分數( 白 )&gt; ( point ( 死四 ) + point ( 特殊活三 ) ){</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp +=&nbsp; score( 黑 );</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp ){</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            winrate = temp</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (
-            bestx , besty ) = ( x , y )</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤 &nbsp;</p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>還原棋盤</strong></p>
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            五子棋有很多能制勝的手段，其中最經典的就是死四加活三(其他的致勝手例如雙死四雙活三等等分數都比死四活三(特殊活三)高，所以CODE裡面寫死四加活三(特殊活三)的分數)，所以如果對手能在棋盤中下一子達成如此棋型，我便會搶先去阻止它，並在能阻止他的諸多手段中，找到對目前局勢最有利的一子，但如果我方能夠在這一輪就嚇出致勝手，我們則不會去預判對手，自己搶先取得先機，所以在這個迴圈後也會補一個黑棋版本的檢查致勝手。
-        </p>
-        <p>&nbsp;&nbsp; 以上就是為五子棋AI大致的寫法。</p>
+        <div id=myPart>
+            <ol start="3">
+
+                <li style="color: black; size: 5;">五子棋：(my part)</li>
+            </ol>
+
+            <p>&nbsp;&nbsp;
+                五子棋的雙人模式很簡單，就只是把玩家下的棋印出來，然後檢查有沒有禁手(因為五子棋先手優勢太大因此對黑棋有所限制，ex不能同時有兩個活四或兩個活三)或是連五(五個相同顏色旗子連成直線)就好了。
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;
+                所以我們決定寫能夠單人遊玩的AI系統，讓電腦幫我們判定應該要下在哪裡。首先，五子棋有幾種特定棋型可以幫助我們贏得勝利，例如活四(四個子連在一起且兩頭都沒有對手旗子)或者是死三(三個子連在一起但一頭被對手旗子擋住)等等，並且還有很多以許多特殊的形式呈現，例如連兩顆棋，空一格後在一顆棋，形成特殊的活三。而其能為我方帶來的助益各不相同。所以我決定量化這些棋型，活四為100分、死四30分、普通活三42分、特殊活三28分等等，這樣一來每個棋局都會有一個黑棋的分數以及白棋的分數。
+            </p>
+            <p>&nbsp;&nbsp;&nbsp; 我用窮舉的方式，以下設電腦為黑棋，真人為白旗</p>
+            <p>if (找到特定棋型(ex活三'、死四)</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; score( 黑棋或白棋 )+=point( case )</p>
+            <p>for( 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; +=&nbsp; score( 黑 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; winrate = temp</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
+            <p>&nbsp;&nbsp;&nbsp; 在對手( 真人 )下完後，分析棋盤上每個落點，看下在哪裡可以為我方帶來最多的分數，以及同時減少對手最多的分數，那個點就是我們想要電腦下的。</p>
+            <p>&nbsp;&nbsp;&nbsp; 然而這並不能解決所有問題，因為有些情況，例如死四，雖然價值不高，只需一手便能阻止，但對手一旦做成該棋型還是必須去應，不然對手會直接勝利。所以我寫了一個迴圈阻止這件事情。
+            </p>
+            <p>if ( 白棋有死四 )</p>
+            <p>&nbsp;&nbsp; for ( 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( 白棋沒有死四 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
+            <p>&nbsp;&nbsp;&nbsp; 這樣一來，只少AI已經不會犯愚蠢的錯誤了，然而我覺得電腦的能力不僅僅於此，所以我決定試著讓他預判對手的棋路</p>
+            <p>for(&nbsp; 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 原來分數( 白 )= score ( 白 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下白子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; if (score( 白 ) - 原來分數( 白 )&gt; ( point ( 死四 ) + point ( 特殊活三 ) ){</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp +=&nbsp; score( 黑 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp ){</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                winrate = temp</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (
+                bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤 &nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>還原棋盤</strong></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                五子棋有很多能制勝的手段，其中最經典的就是死四加活三(其他的致勝手例如雙死四雙活三等等分數都比死四活三(特殊活三)高，所以CODE裡面寫死四加活三(特殊活三)的分數)，所以如果對手能在棋盤中下一子達成如此棋型，我便會搶先去阻止它，並在能阻止他的諸多手段中，找到對目前局勢最有利的一子，但如果我方能夠在這一輪就嚇出致勝手，我們則不會去預判對手，自己搶先取得先機，所以在這個迴圈後也會補一個黑棋版本的檢查致勝手。
+            </p>
+            <p>&nbsp;&nbsp; 以上就是為五子棋AI大致的寫法。</p>
+        </div>
         <ol start="4">
             <li>迂棋：</li>
         </ol>
@@ -218,11 +226,13 @@
             </li>
         </ol>
         <p><strong>四、分工與心得</strong></p>
-        <ul>
-            <li>歐崇愷：五子棋的部分</li>
-        </ul>
-        <p>由於我棋力不高所以很多時候我是下不贏的，勝率約為兩成吧，不過後來下的時候會考慮到演算法，變得越來越可預測電腦會下哪裡，所以勝率有些微提升，希望以後可以避免這種問題(程式中多加入考慮的情況)。不過在看很多人挑戰我AI失敗時，那種感覺真的很開心，就好像是我自己下贏了一樣，滿滿的成就感，畢竟這個系統從頭到尾都是誕生自我。而這次專案學到最多的應該是函數化的能力吧，因為是很多人一起完成一個大程式，所以把自己的部分函數化以及模組化以方便其他人使用是很重要的，例如我的程式一開始是可以選擇棋盤大小的，後來在統一棋盤大小時才可以很方便的修改global
-            const int以順利地跟其他隊友配合。</p>
+        <div id="myOpinion">
+            <ul>
+                <li>歐崇愷：五子棋的部分</li>
+            </ul>
+            <p>由於我棋力不高所以很多時候我是下不贏的，勝率約為兩成吧，不過後來下的時候會考慮到演算法，變得越來越可預測電腦會下哪裡，所以勝率有些微提升，希望以後可以避免這種問題(程式中多加入考慮的情況)。不過在看很多人挑戰我AI失敗時，那種感覺真的很開心，就好像是我自己下贏了一樣，滿滿的成就感，畢竟這個系統從頭到尾都是誕生自我。而這次專案學到最多的應該是函數化的能力吧，因為是很多人一起完成一個大程式，所以把自己的部分函數化以及模組化以方便其他人使用是很重要的，例如我的程式一開始是可以選擇棋盤大小的，後來在統一棋盤大小時才可以很方便的修改global
+                const int以順利地跟其他隊友配合。</p>
+        </div>
         <ul>
             <li>徐捷：迂棋負責(程式碼、書面報告、口頭報告)</li>
         </ul>
