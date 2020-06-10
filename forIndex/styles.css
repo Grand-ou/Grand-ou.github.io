@@ -11,11 +11,7 @@
  * Copyright 2011-2020 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
-@media(max-width: 600px) {
-  .introducePic {
-    height: 2000px;
-  }
-}
+
 
 :root {
   --blue: #007bff;
