@@ -139,7 +139,7 @@ function computer(target)
 						
 						var temp = k + '-' + q;
 						var opp =  deadFore('td[weizhi="'+temp+'"]', counter);
-						if (opp > 45)
+						if (opp > 100)
 						{
 							current += 100;
 						}
@@ -153,8 +153,8 @@ function computer(target)
 					//console.log(current, "maxPoint=",maxPoint);
 					maxPoint = current;
 					ti = i, tj = j;
-					// console.log(current, "maxPoint=",maxPoint);
-					// console.log(ti , tj)
+					console.log(current, "maxPoint=",maxPoint);
+					console.log(ti , tj)
 				}
 				$('td[weizhi="'+value+'"]').html('*');}
 			}
@@ -242,7 +242,7 @@ function score(checked_weizhi, target)
 	if (cnt >= 5)
 	{
 
-		pointCnt += 10000;
+		pointCnt += 100000;
 		
 	}
 	if (conti == cnt)
