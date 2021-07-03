@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Resume - Start Bootstrap Theme</title>
+    <link rel="icon" type="image/x-icon" href="forIndex/home4.jpg" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet"
+        type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="styles.css" rel="stylesheet" />
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav">
+        <a class="navbar-brand js-scroll-trigger" href="https://grand-ou.github.io/"><span
+                class="d-block d-lg-none">Grand-Ou</span><span class="d-none d-lg-block"><img
+                    class="img-fluid img-profile rounded-circle mx-auto mb-2" src="forIndex/home3.jpg"
+                    alt="" /></span></a><button class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link js-scroll-trigger "
+                        href="https://grand-ou.github.io/#project">home</a>
+                </li><br>
+                <li class="nav-item"> <a class="nav-link js-scroll-trigger "
+                        href="https://youtu.be/ADBYMUGO77c">video</a></li><br>
+                <li class="nav-item"> <a class="nav-link js-scroll-trigger " href="#myPart">my part</a></li><br>
+                <li class="nav-item"> <a class="nav-link js-scroll-trigger " href="#myOpinion">my opinion</a></li><br>
+
+
+
+            </ul>
+        </div>
+    </nav>
+    <!-- Page Content-->
+    <div class="container-fluid p-0">
+
+        <p><strong>108-1 程式設計期末專題</strong></p>
+        <p><strong>棋歿 Project</strong></p>
+        <p><strong>組別：第21組 CKO41&amp;42</strong></p>
+        <p><strong>組員：</strong>社工一 歐崇愷 B08310054&nbsp; 農經一&nbsp; 徐捷 B08607050</p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; 資管一 徐子晏 B08705014&nbsp; 資管一 陳旻浚 B08705051</p>
+        <p>&nbsp; 資管一 劉為德 B08705055</p>
+        <p><strong>一、專題動機</strong></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            我們原本打算製作的是許多經典懷舊小遊戲，包括象棋的暗棋，但後來我們下定決心全心全意打造各種棋類遊戲，讓玩家們、也讓我們自己腦力激盪一下。身為臺灣人，或是中華民族的一份子，絕對不可或缺的是歷史悠久的大盤象棋。我們也希望能有容易上手，能和朋友隨時競技的五子棋。最後，我們決定向大家介紹一種來自中南美洲的棋類--迂棋。
+        </p>
+        <p><strong>二、系統設計及演算法</strong></p>
+        <ol>
+            <li>顯示及輸入輸出：</li>
+        </ol>
+        <p>&nbsp; 我們主要使用的是SFML裡的Graphics.hpp標頭檔來建立介面以及讀取輸入。</p>
+        <ul>
+            <li><strong>sf::RenderWindow window(window size, window name, window style)</strong></li>
+        </ul>
+        <p>我們使用這個函數來產生視窗，並使用視窗來跟使用者互動。至於window style的部分，可以選擇你想要讓使用者對這個視窗做甚麼樣的操作，例如：可不可以改變視窗的大小、可不可以關掉視窗、視窗要不要是全螢幕的等等。
+        </p>
+        <ul>
+            <li><strong>sf::RectangleShape(CircleShape) and&nbsp; sf::Texture</strong></li>
+        </ul>
+        <p>有了視窗之後，接下來就要創造物件來顯示棋盤與棋子等物件。創造完物件後就要幫他上色，我們使用Texture儲存要放在棋子上的圖片，再使用sf::RectangleShape(CircleShape)::setTexture
+            函數來將此Texture放在我們的物件上，就可以顯示出我們想要的圖片了。</p>
+        <ul>
+            <li><strong>sf::Mouse::isButtonPressed(sf::Mouse::Left)</strong></li>
+            <li><strong>sf::Mouse::getPosition(window)</strong></li>
+        </ul>
+        <p>為了讓我們的遊戲玩起來更直觀，我們決定使用滑鼠點擊的方式來讓使用者移動棋子，而不是用鍵盤輸入座標。首先，我們將棋盤上每個格子點的像素座標紀錄下來。再來我們使用了isButtonPressed這個函數，它可以幫我們偵測使用者是否按下了左鍵，當使用者按下左鍵，我們就使用getPosition來得倒鼠標目前的像素位置。得到像素位置後，我們接著去比較這個位置與每個格子點的距離，若距離小於等於一顆棋子的距離，就代表使用者想要選取的是這顆棋子。
+        </p>
+        <ul>
+            <li><strong>draw() window.display()&nbsp;&nbsp;&nbsp; window.clear()</strong></li>
+        </ul>
+        <p>現在只剩下將我們想要畫出的東西顯示在螢幕上了。首先我們要了解顯示的原理。請想像我們有兩個螢幕，但一個是隱藏在後，使用者看不到的。我們的draw函數就是把東西畫在隱藏的螢幕，而display則代表我們想要將原本隱藏的那個螢幕置換成使用者見的到的螢幕，而將使用者現在見到的那個螢幕轉為隱藏在後的。clear則是將隱藏螢幕上的畫面清除，如果沒有這個步驟，已經移動的棋子還是會顯示在螢幕上。
+        </p>
+        <ol start="2">
+            <li>象棋：</li>
+        </ol>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            我們設計的象棋為雙人的線下大盤模式，而遊戲要順利運作，不外乎需要判斷棋子這樣的走法是否可行，也要判斷是否有一方將對手逼入「將死」或「倒棋」的情形。而為了實現我們的目標，我們寫了以下的class和幾種函數。</p>
+        <ul>
+            <li><strong>class Point</strong></li>
+        </ul>
+        <p>為了方便記錄座標，我們寫了這個class。裡面有兩個int，分別是x跟y。除了constructor，我們也overload了 == 跟 !=，更直觀的比較兩個Point之間的關係。</p>
+        <ul>
+            <li><strong>class Chess</strong></li>
+        </ul>
+        <p>每一顆棋子都有屬於自己的特性，為了方便儲存並存取這些特性，我們寫了這個class。裡面包含了關於棋子的一些資訊，例如：棋子是否還活著、是否被使用者選取、棋種的編號、棋子的座標、以及棋子的樣貌。</p>
+        <ul>
+            <li><strong>int chessBetweenPoints (Point start, Point destination)</strong></li>
+        </ul>
+        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp; </strong>為了等一下判斷某些棋子(車、砲、將)的移動是否可行，我們先設計一個函數計算兩點間的棋子數。若兩點在不同行、不同列，則直接回傳 -1;
+            若兩點在同行或是同列，則根據矩陣上每點的值判斷該點是否有棋子，並計算有幾個棋子在兩點中間。</p>
+        <ul>
+            <li><strong>bool canMove (int chessType, Point start, </strong></li>
+        </ul>
+        <p><strong>&nbsp;Point destination, int round)</strong></p>
+        <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;
+            </strong>因為我們在選取棋子時就已經判斷輪到誰的回合，所以我們現在只要直接判斷走法是否可行。我們會先判斷目的地上的棋子是否和正在移動的棋子屬同一方，是的話則不可行。接下來我們就會依據chessType判斷棋子種類，再依據以下方式判別是否可行。若可行則回傳true;
+            反之為false。</p>
+        <p>車：chessBetweenPoints要等於0。</p>
+        <p>馬：若起點(x1,y1)與終點(x2,y2)x座標相差2且y座標相差1，則拐馬腳的點(x1+(x2-x1)/2,y1)上不能有棋子;若起點(x1,y1)與終點(x2,y2)y座標相差2且x座標相差1，則拐馬腳的點(x1,y1+(y2-y1)/2)上不能有棋子。
+        </p>
+        <p>象：起點(x1,y1)與終點(x2,y2)的x座標及y座標皆需相差2且塞象眼的點(x1+(x2-x1)/2,y1+(y2-y1)/2)上不能有棋子。除此之外，因為象不能過河，所以視其為紅象或黑象，需設立不同的y座標限制。
+        </p>
+        <p>士：起點(x1,y1)與終點(x2,y2)的x座標及y座標皆需相差1且不可走出九宮格，所以也需分別設立不同的x,y座標限制。</p>
+        <p>將：將的移動方法為x座標相同且y座標相差1或y座標相同且x座標相差1，而且也不可超出九宮格。另外，若目的地上的棋子為敵方將軍且chessBetweenPoints為0，也可移動。</p>
+        <p>砲：若目的地上有棋，chessBetweenPoints要等於0; 反之，chessBetweenPoints要等於0。</p>
+        <p>卒：若是向前走便可行，否則需判斷其過河沒來決定其是否可以向側邊移動。</p>
+        <ul>
+            <li><strong>bool check (bool red, Chess chesses, </strong></li>
+        </ul>
+        <p><strong>bool moveHandsome, Point mousePosition)</strong></p>
+        <p>此函式是要判斷現在是否有玩家被將軍(check)的情況。首先，要判斷現在是紅方(red=true)還是黑方(red=false)要將軍對方，再看對方是否有移動將軍(moveHandsome)，進而決定要存取現在新移動到的位置(mousePosition)還是原來的將軍座標。接著，就將剛決定的座標當作目的地傳入canMove函數，移動每顆具攻擊性的棋子(車、馬、砲、卒、將)是否能到達對方將軍的座標。若可以，則回傳true。反之，回傳false。
+        </p>
+        <p>接下來的兩個函數，因為會更改到我們儲存棋盤上每個點上的棋子矩陣(global
+            variable)的值，導致一些錯誤，所以我們沒有將其拉出來作為函數，而是將其寫在象棋的function內。但在理想狀況下，應該設為函數，以方便模組化。</p>
+        <ul>
+            <li><strong>bool willBeChecked (int round, Chess chesses</strong></li>
+        </ul>
+        <p><strong>bool moveHandsome, Point mousePosition)</strong></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            此函數是為了要判斷接下來要移動的這一步會不會陷玩家於被將軍的困境。實現的方法是要存取目的地棋子的種類(若有)，並假設這步可以移動，然後將試移動的結果傳入check，檢驗是否有被對方將軍。若移動後會被將軍，則需還原剛才的移動，所以我們才要先存取目的地上的棋子，然後回傳true。反之，若不會被將軍，則回傳false。
+        </p>
+        <ul>
+            <li><strong>bool checkmate (int round, Chess chesses</strong></li>
+        </ul>
+        <p><strong>bool moveHandsome, Point mousePosition)</strong></p>
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            此函數是我們象棋中最複雜的函數，其內部也運用了我們上述的所有函式，目的是要判斷一方玩家是否「倒棋」或「欠行」。實行的方法是試移動所有己方的棋子至所有可能的地點，利用willBeChecked判斷是否會被將軍。只要一種情況下willBeChecked為false，則回傳false。若所有情況皆會被將軍，則回傳true，結束遊戲。
+        </p>
+        <div id=myPart>
+            <ol start="3">
+
+                <li style="color: black; size: 5;">五子棋：(my part)</li>
+            </ol>
+
+            <p>&nbsp;&nbsp;
+                五子棋的雙人模式很簡單，就只是把玩家下的棋印出來，然後檢查有沒有禁手(因為五子棋先手優勢太大因此對黑棋有所限制，ex不能同時有兩個活四或兩個活三)或是連五(五個相同顏色旗子連成直線)就好了。
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;
+                所以我們決定寫能夠單人遊玩的AI系統，讓電腦幫我們判定應該要下在哪裡。首先，五子棋有幾種特定棋型可以幫助我們贏得勝利，例如活四(四個子連在一起且兩頭都沒有對手旗子)或者是死三(三個子連在一起但一頭被對手旗子擋住)等等，並且還有很多以許多特殊的形式呈現，例如連兩顆棋，空一格後在一顆棋，形成特殊的活三。而其能為我方帶來的助益各不相同。所以我決定量化這些棋型，活四為100分、死四30分、普通活三42分、特殊活三28分等等，這樣一來每個棋局都會有一個黑棋的分數以及白棋的分數。
+            </p>
+            <p>&nbsp;&nbsp;&nbsp; 我用窮舉的方式，以下設電腦為黑棋，真人為白旗</p>
+            <p>if (找到特定棋型(ex活三'、死四)</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; score( 黑棋或白棋 )+=point( case )</p>
+            <p>for( 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; +=&nbsp; score( 黑 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; winrate = temp</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
+            <p>&nbsp;&nbsp;&nbsp; 在對手( 真人 )下完後，分析棋盤上每個落點，看下在哪裡可以為我方帶來最多的分數，以及同時減少對手最多的分數，那個點就是我們想要電腦下的。</p>
+            <p>&nbsp;&nbsp;&nbsp; 然而這並不能解決所有問題，因為有些情況，例如死四，雖然價值不高，只需一手便能阻止，但對手一旦做成該棋型還是必須去應，不然對手會直接勝利。所以我寫了一個迴圈阻止這件事情。
+            </p>
+            <p>if ( 白棋有死四 )</p>
+            <p>&nbsp;&nbsp; for ( 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( 白棋沒有死四 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ( bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤</p>
+            <p>&nbsp;&nbsp;&nbsp; 這樣一來，只少AI已經不會犯愚蠢的錯誤了，然而我覺得電腦的能力不僅僅於此，所以我決定試著讓他預判對手的棋路</p>
+            <p>for(&nbsp; 每一格 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 原來分數( 白 )= score ( 白 )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; 在該格下白子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp; if (score( 白 ) - 原來分數( 白 )&gt; ( point ( 死四 ) + point ( 特殊活三 ) ){</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 在該格下黑子</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp +=&nbsp; score( 黑 );</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; temp&nbsp; -=&nbsp; score( 白 );
+            </p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if ( winrate &lt; temp ){</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                winrate = temp</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (
+                bestx , besty ) = ( x , y )</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 還原棋盤 &nbsp;</p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <strong>還原棋盤</strong></p>
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                五子棋有很多能制勝的手段，其中最經典的就是死四加活三(其他的致勝手例如雙死四雙活三等等分數都比死四活三(特殊活三)高，所以CODE裡面寫死四加活三(特殊活三)的分數)，所以如果對手能在棋盤中下一子達成如此棋型，我便會搶先去阻止它，並在能阻止他的諸多手段中，找到對目前局勢最有利的一子，但如果我方能夠在這一輪就嚇出致勝手，我們則不會去預判對手，自己搶先取得先機，所以在這個迴圈後也會補一個黑棋版本的檢查致勝手。
+            </p>
+            <p>&nbsp;&nbsp; 以上就是為五子棋AI大致的寫法。</p>
+        </div>
+        <ol start="4">
+            <li>迂棋：</li>
+        </ol>
+        <p>我們的迂棋是雙人對戰版，所以沒有AI的問題需要處理。最大的挑戰，在於「回合開始時，有沒有可以吃掉對手棋子的走法」，以及「吃掉對手棋子後，有沒有繼續連吃棋子的走法」這兩個判斷。</p>
+        <p>首先，若是回合開始時沒有任何方式可以一步吃掉對手棋子，則可以選擇己方任意一顆棋子，往身旁任意方向移動一格(當然，會依據該格是四向格還是八向格有別)。若是有，則從所有能吃的選項中選一個走。吃的方法有撞吃和跳吃：靠近對手，或是遠離對手，然後吃掉同方向接鄰的一整排棋子。如果移到新位置後該位置還有能吃掉另一顆棋的走法，則可以連續吃下去；但是連續移動時不能連續往同一個方向移動兩次，且不能停在同一個地方兩次。若是不想連續吃的話，也可以選擇取消。吃到不能吃了或是選擇取消後，就輪到對手。
+        </p>
+        <p>我用了五個bool 變數(兩個陣列、三個單一的)，分別判斷「這一格的旗子是哪個陣營的」、「這一格有沒有棋子」、「輪到哪一方」、「是否已選取棋子」、「是否正在連鎖當中」，下方兩個函式中的許多條件都需用到這些判斷。</p>
+        <p>獲勝條件很簡單，誰先把對手的22顆棋子吃完的，就贏了。</p>
+        <p>下面是上面提到的兩個判斷的PseudoCode：</p>
+        <ul>
+            <li>bool detectingEatable：</li>
+        </ul>
+        <ol>
+            <li>判斷往這個方向移動會不會出界</li>
+            <li>如果不會，判斷往這個方向走能不能吃到棋子；若能撞、跳吃，則以撞吃為優先，因為撞吃的判斷範圍較大(移動時向前一格，被吃掉的棋還在更前面的一格)；如果撞吃不行，那就跳吃(向前一格，吃掉原位置背後的棋子)，但是這裡其實不用管順序，因為只是要判斷有沒有得吃。
+            </li>
+            <li>回傳結果</li>
+        </ol>
+        <p>因為我會連續八(or四)次(判斷不同方向)呼叫這個函式，所以這個函式本身並沒有迴圈。</p>
+        <ul>
+            <li>bool continueAble：</li>
+        </ul>
+        <ol>
+            <li>判斷往這個方向移動會不會出界</li>
+            <li>如果不會，判斷往這個方向走會不會違規(ex:出界、同方向前進、回到已經去過的位置...)</li>
+            <li>如果不會，能不能吃到棋子(也就是能不能撞、跳吃)，這裡其實也不用管順序，因為實際上是當你點下去的時候才會做出「先撞後跳」的判斷。</li>
+            <li>回傳結果。</li>
+        </ol>
+        <p><strong>三、未來展望</strong></p>
+        <ol>
+            <li>象棋：未來若要繼續發展，則可以考慮加入AI，設立單人模式。要讓電腦找出最佳的移動方法，可以嘗試的演是類似checkmate的函數加上五子棋的單人演算法，在每動一步後為現在的局勢打分數，尤其是在吃掉對方的主力棋時加分。然而，開局該如何開始及象棋每顆棋不同的走法和局勢的複雜性將難度提升許多。2.
+                五子棋：能夠預測更多步對手的棋路，以及找到連續攻擊(不停創造死四活三直到下出致勝手)。</li>
+            <li>迂棋：也是加入AI，並且有難度差異：比如說，最初級的只會以能夠吃最多的步法執行，稍高一級的可能就會多想一步，考慮如何讓對手下一手吃少一點；再強一點的，可能還能在場上出現無棋可吃的時候找到強力的取勝方法...等等。
+            </li>
+        </ol>
+        <p><strong>四、分工與心得</strong></p>
+        <div id="myOpinion">
+            <ul>
+                <li>歐崇愷：五子棋的部分</li>
+            </ul>
+            <p>由於我棋力不高所以很多時候我是下不贏的，勝率約為兩成吧，不過後來下的時候會考慮到演算法，變得越來越可預測電腦會下哪裡，所以勝率有些微提升，希望以後可以避免這種問題(程式中多加入考慮的情況)。不過在看很多人挑戰我AI失敗時，那種感覺真的很開心，就好像是我自己下贏了一樣，滿滿的成就感，畢竟這個系統從頭到尾都是誕生自我。而這次專案學到最多的應該是函數化的能力吧，因為是很多人一起完成一個大程式，所以把自己的部分函數化以及模組化以方便其他人使用是很重要的，例如我的程式一開始是可以選擇棋盤大小的，後來在統一棋盤大小時才可以很方便的修改global
+                const int以順利地跟其他隊友配合。</p>
+        </div>
+        <ul>
+            <li>徐捷：迂棋負責(程式碼、書面報告、口頭報告)</li>
+        </ul>
+        <p>一開始我因為懶得搞SFML所以試著用網路上的貪食蛇範本自學windows.h的用法，花了真的很不少的時間才把棋盤列出來，可是隨隨便便就會runtime
+            error，而且操縱棋子的部分我也不知道該怎麼做，所以最後只好想辦法裝了SFML來用。幸好它的使用方式很直觀，網路上也有充足的教程與範本，還有組員能支援，所以生成畫面和修改並不是什麼問題，雖然(算上演算法的部分)還是很容易出包。當我第一次做出能夠正常移動、吃棋、換人的版本時還真的是滿感動的，畢竟這次真的是在很迫切的情況下硬逼自己去學一些新的東西。
+        </p>
+        <ul>
+            <li>徐子晏：監督進度、象棋演算法、象棋演算法的書面報告</li>
+        </ul>
+        <p>這次的專題與期中大不同，也是我們第一次使用外來的library和函數。這次親自寫出遊戲，也藉由聆聽他組報告，才真正了解我從小玩的許多遊戲背後的程式原理，以及要寫出每一樣細節，是要考慮多少變數。除此之外，更了解到為何要有一個職業專門為遊戲測試bug。這次為了測試象棋是否有bug，我們動了每一顆棋到每一個位置，更測試了無數將軍和倒棋的方法，才漸漸修改成沒有bug的函數。這次專題的收獲除了嘗試從未使用過的函數，更學習了分工合作的困難。最後，便是看到自己寫的遊戲正確運作時的那成就感！
+        </p>
+        <ul>
+            <li>陳旻浚：象棋與五子棋的顯示部分、選取表單、顯示的書面報告</li>
+        </ul>
+        <p>這次的專案，最困難的部分大概就是如何將外來的SFML library
+            include至我們的專案中了吧！為了要讓編譯器可以編譯SFML程式，需要設定一大堆東西，像是linker以及許多檔案位置都要讓編譯器知道，一點點微小的設定錯誤都會讓程式無法編譯。在成功include
+            SFML後，也是探索了很久裡面到底有什麼函數，並學習如何正確地使用他們及應用在我們的專案中。可惜的是並沒有去學習如何將聲音加入遊戲中，否則將會使遊戲更加的生動。看著棋子一顆一顆的成功被顯示出來，在使用者選取時也可以正確地知道使用者選的位置並移動棋子，心中充滿了滿滿的成就感。
+        </p>
+        <ul>
+            <li>劉為德：象棋初架構、書面報告初架構</li>
+        </ul>
+        <p>剛開始我是負責象棋，但是畫棋盤的部分有嚴重困難。可以跳出一個視窗並且顯示棋子這個瓶頸我並沒有突破，所以就先決定把後置的部分處理好也就是步伐的部分。每一種棋我都立了一個BOOL來判斷步伐合不合理，以前學過的排列組合居然有幫助我思考。排列組合有分成正面作法跟反面做法，這對於判斷步伐的合理性有很大的幫助。以前學習的數學物理雖然沒有直接的幫助，但訓練的思考模式對未來的學習有效果。有這種團體報告的課程訓練我們更多技能，往後真正進入職場後一定也有這種合作的機會。
+        </p>
+
+
+
+
+    </div>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+    <!-- Third party plugin JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="scripts.js"></script>
+</body>
+
+</html>
